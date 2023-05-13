@@ -2,6 +2,7 @@ package com.driver;
 
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.time.Clock;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,10 +48,12 @@ public class Workspace extends Gmail{
                 return 1;
             }
         });
-
+//        for(Meeting meeting : list){
+//            System.out.println(meeting.getStartTime()+" "+meeting.getEndTime());
+//        }
         int count = 1;
         LocalTime endOfMeeting = list.get(0).getEndTime();
-        for (int i = 1; i < list.size()-1; i++) {
+        for (int i = 1; i < list.size(); i++) {
            Meeting meeting = list.get(i);
            if(endOfMeeting.isBefore(meeting.getStartTime())){
                count++;
@@ -59,4 +62,19 @@ public class Workspace extends Gmail{
         }
         return count;
     }
+    public static void main(String[] args) {
+        Workspace workspace = new Workspace("qbcd");
+        workspace.addMeeting(new Meeting(LocalTime.MIN,LocalTime.now(Clock.systemDefaultZone())));
+        workspace.addMeeting(new Meeting(LocalTime.MIDNIGHT,LocalTime.MAX));
+        workspace.addMeeting(new Meeting(LocalTime.of(11,7),LocalTime.of(11,8,2)));
+        workspace.addMeeting(new Meeting(LocalTime.of(1,9),LocalTime.of(2,6,2)));
+        workspace.addMeeting(new Meeting(LocalTime.of(5,7),LocalTime.of(7,7,1)));
+        workspace.addMeeting(new Meeting(LocalTime.of(2,5),LocalTime.of(6,3,0)));
+        workspace.addMeeting(new Meeting(LocalTime.of(12,1),LocalTime.of(4,2,2)));
+        workspace.addMeeting(new Meeting(LocalTime.of(9,8),LocalTime.of(10,17,56)));
+        workspace.addMeeting(new Meeting(LocalTime.of(8,10),LocalTime.of(10,30,30)));
+
+        System.out.println(workspace.findMaxMeetings());
+    }
 }
+
