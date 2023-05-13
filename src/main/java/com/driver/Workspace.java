@@ -52,7 +52,7 @@ public class Workspace extends Gmail{
         LocalTime endOfMeeting = list.get(0).getEndTime();
         for (int i = 1; i < list.size()-1; i++) {
            Meeting meeting = list.get(i);
-           if(endOfMeeting.compareTo(meeting.getStartTime()) < 0){
+           if(endOfMeeting.isBefore(meeting.getStartTime())){
                count++;
                endOfMeeting = meeting.getEndTime();
            }
