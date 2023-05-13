@@ -42,7 +42,9 @@ public class Workspace extends Gmail{
         Collections.sort(list, new Comparator<LocalTime>() {
             @Override
             public int compare(LocalTime o1, LocalTime o2) {
-                return o1.compareTo(o2);
+                if(o1.isBefore(o2))return -1;
+                if(o1.equals(o2))return -1;
+                return 1;
             }
         });
 

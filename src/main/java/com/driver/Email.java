@@ -53,14 +53,14 @@ public class Email {
 
         boolean hasDigit = false;
         for(int i = 0; i < len; i++){
-            hasDigit = hasDigit||Character.isDigit(newPassword.charAt(i));
+            if(Character.isDigit(newPassword.charAt(i))) hasDigit = true;
         }
         if(!hasDigit)return;
 
         boolean hasSpecial = false;
         for (int i = 0; i < len; i++) {
             char c = newPassword.charAt(i);
-            hasSpecial = hasSpecial || !(Character.isDigit(c) && !(65 <= (int)c && (int)c <= 90) && !(97 <= (int)c && (int)c <= 122)) ;
+             if(!(Character.isDigit(c) && !(65 <= (int)c && (int)c <= 90) && !(97 <= (int)c && (int)c <= 122)))hasSpecial = true ;
         }
         if(!hasSpecial) return;
         password = newPassword;

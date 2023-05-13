@@ -10,25 +10,7 @@ public class Gmail extends Email {
     Queue<Mail> trashQueue;
     int inboxCapacity; //maximum number of mails inbox can store
 
-    public Queue<Mail> getInboxQueue() {
-        return inboxQueue;
-    }
 
-    public void setInboxQueue(Queue<Mail> inboxQueue) {
-        this.inboxQueue = inboxQueue;
-    }
-
-    public Queue<Mail> getTrashQueue() {
-        return trashQueue;
-    }
-
-    public void setTrashQueue(Queue<Mail> trashQueue) {
-        this.trashQueue = trashQueue;
-    }
-
-    public void setInboxCapacity(int inboxCapacity) {
-        this.inboxCapacity = inboxCapacity;
-    }
 
     //Inbox: Stores mails. Each mail has date (Date), sender (String), message (String). It is guaranteed that message is distinct for all mails.
     //Trash: Stores mails. Each mail has date (Date), sender (String), message (String)
@@ -44,6 +26,7 @@ public class Gmail extends Email {
         // It is guaranteed that:
         // 1. Each mail in the inbox is distinct.
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
+        if(inboxCapacity < 0) return;
         if(inboxQueue.size() == inboxCapacity)trashQueue.offer(inboxQueue.poll());
         inboxQueue.offer(new Mail(date,sender,message));
 
@@ -120,7 +103,25 @@ public class Gmail extends Email {
         // Return the maximum number of mails that can be stored in the inbox
         return inboxCapacity;
     }
+    public Queue<Mail> getInboxQueue() {
+        return inboxQueue;
+    }
 
+    public void setInboxQueue(Queue<Mail> inboxQueue) {
+        this.inboxQueue = inboxQueue;
+    }
+
+    public Queue<Mail> getTrashQueue() {
+        return trashQueue;
+    }
+
+    public void setTrashQueue(Queue<Mail> trashQueue) {
+        this.trashQueue = trashQueue;
+    }
+
+    public void setInboxCapacity(int inboxCapacity) {
+        this.inboxCapacity = inboxCapacity;
+    }
     private class Mail {
         Date date;
         String sender;
