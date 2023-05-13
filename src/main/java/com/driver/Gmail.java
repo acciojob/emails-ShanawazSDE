@@ -28,7 +28,7 @@ public class Gmail extends Email {
         // 2. The mails are received in non-decreasing order. This means that the date of a new mail is greater than equal to the dates of mails received already.
         if(inboxCapacity < 0) return;
         if(inboxQueue.size() == inboxCapacity)trashQueue.offer(inboxQueue.poll());
-        inboxQueue.offer(new Mail(date,sender,message));
+        inboxQueue.offer(new Mail(date, sender, message));
 
     }
 
@@ -53,9 +53,10 @@ public class Gmail extends Email {
         if(size == 0)return null;
         String msg = "";
         while (size > 0){
-            Mail mail = inboxQueue.peek();
+            Mail mail = inboxQueue.poll();
             assert mail != null;
             if(size == 1)msg = mail.message;
+            inboxQueue.offer(mail);
             size--;
         }
         return msg;
@@ -122,7 +123,7 @@ public class Gmail extends Email {
     public void setInboxCapacity(int inboxCapacity) {
         this.inboxCapacity = inboxCapacity;
     }
-    private class Mail {
+    private static class Mail {
         Date date;
         String sender;
         String message;
