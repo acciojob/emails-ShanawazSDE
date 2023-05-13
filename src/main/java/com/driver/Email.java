@@ -39,15 +39,17 @@ public class Email {
     if(len < 8)return;
     boolean hasUpper = false;
     for(int i = 0; i < len; i++){
-        int ascii = (int) newPassword.charAt(i);
-        if(ascii >= 65 && ascii <= 90)hasUpper = true;
+//        int ascii = (int) newPassword.charAt(i);
+//        if(ascii >= 65 && ascii <= 90)hasUpper = true;
+        if(Character.isUpperCase(newPassword.charAt(i)))hasUpper = true;
     }
     if(!hasUpper) return;
 
         boolean hasLower = false;
         for(int i = 0; i < len; i++){
-            int ascii = (int) newPassword.charAt(i);
-            if(ascii >= 97 && ascii <= 122)hasLower = true;
+//            int ascii = (int) newPassword.charAt(i);
+//            if(ascii >= 97 && ascii <= 122)hasLower = true;
+            if(Character.isLowerCase(newPassword.charAt(i)))hasLower = true;
         }
         if(!hasLower)return;
 
@@ -60,9 +62,13 @@ public class Email {
         boolean hasSpecial = false;
         for (int i = 0; i < len; i++) {
             char c = newPassword.charAt(i);
-             if(!(Character.isDigit(c) && !(65 <= (int)c && (int)c <= 90) && !(97 <= (int)c && (int)c <= 122)))hasSpecial = true ;
+             if(!(Character.isDigit(c)) && !(65 <= (int)c && (int)c <= 90) && !(97 <= (int)c && (int)c <= 122))hasSpecial = true ;
         }
         if(!hasSpecial) return;
         password = newPassword;
     }
+
+//    public static void main(String[] args) {
+//        System.out.println( Character.isUpperCase('1'));
+//    }
 }
